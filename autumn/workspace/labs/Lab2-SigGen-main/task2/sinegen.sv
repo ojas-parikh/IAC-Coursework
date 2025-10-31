@@ -7,13 +7,13 @@ module sinegen #(
     input logic               rst,  //reset
     input logic               en,   //enable
     input logic [D_WIDTH-1:0] incr, //increment for addr counter
-    output logic [D_WIDTH-1:0] dout1 //output data wave 1
+    output logic [D_WIDTH-1:0] dout1, //output data wave 1
     output logic [D_WIDTH-1:0] dout2 //output data wave2
 );
 
-logic [A_WIDTH-1:0]  address; //interconnect wire
+    logic [A_WIDTH-1:0]  address; //interconnect wire
 
-counter addrCounter(
+counter addrCounter (
     .clk(clk),
     .rst(rst),
     .en(en),
@@ -21,9 +21,10 @@ counter addrCounter(
     .count(address)
 );
 
-rom sineRom(
+rom2ports sineRom (
     .clk(clk),
-    .addr(address),
+    .addr1(address),
+    .addr2(address + 64),
     .dout1(dout1),
     .dout2(dout2)
 );

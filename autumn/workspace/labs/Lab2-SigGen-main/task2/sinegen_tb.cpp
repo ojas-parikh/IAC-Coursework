@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env)
     // init Vbuddy
     if (vbdOpen() != 1)
         return (-1);
-    vbdHeader("Lab 2: Sinegen");
+    vbdHeader("Lab 2: Dual Wave Generation");
 
     // initialize simulation inputs
     top->clk = 1;
@@ -41,7 +41,8 @@ int main(int argc, char **argv, char **env)
             top->eval();
         }
         top->incr = vbdValue();
-        vbdPlot(int(top->dout), 0, 255);
+        vbdPlot(int(top->dout1), 0, 255);
+        vbdPlot(int(top->dout2), 0, 255);
 
         top->rst = (i < 2) | (i == 15);
         top->en = (i > 4);
