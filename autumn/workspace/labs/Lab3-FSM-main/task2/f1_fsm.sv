@@ -11,9 +11,11 @@ light_state current_state, next_state;
 
 //state registers
 always @ (posedge clk, posedge rst)
-    if (rst) current_state <= S0;
-    else     current_state <= next_state;
-
+    begin
+        if (rst) current_state <= S0;
+        else if (en) current_state <= next_state;
+        else         current_state <= current_state;
+    end
 //next state logic
 always_comb
     case (current_state)
@@ -23,6 +25,7 @@ always_comb
         S3: next_state = S4;
         S4: next_state = S5;
         S5: next_state = S6;
+        S6: next_state = S7;
         S7: next_state = S8;
         S8: next_state = S0;
         default: next_state = S0;
