@@ -31,7 +31,7 @@ int main(int argc, char **argv, char **env)
     top->en = 0;
 
     // run simulation for many clock cycles
-    for (i = 0; i < 1000; i++)
+    for (i = 0; i < 10000000; i++)
     {
         flag = vbdFlag();
         if (flag_p != flag)
