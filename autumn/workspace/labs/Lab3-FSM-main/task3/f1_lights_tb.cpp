@@ -9,7 +9,6 @@ int main(int argc, char **argv, char **env)
 {
     int simcyc; // simulation clock count
     int tick;   // each clk cycle has two ticks for two edges
-    // int lights = 0; // state to toggle LED lights
 
     Verilated::commandArgs(argc, argv);
     // init top verilog instance
