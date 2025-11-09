@@ -8,6 +8,8 @@ int main(int argc, char **argv, char **env)
 
     int i;
     int clk;
+    int flag = 0;
+    int flag_p = 0;
 
     Verilated::commandArgs(argc, argv);
     // init top verilog instance
@@ -31,8 +33,11 @@ int main(int argc, char **argv, char **env)
     // run simulation for many clock cycles
     for (i = 0; i < 1000; i++)
     {
-
-        top->en = vbdFlag();
+        flag = vbdFlag();
+        if (flag_p != flag)
+        {
+            top->en = 1;
+        }
 
         // dump variables into VCD file and toggle clock
         for (clk = 0; clk < 2; clk++)
@@ -42,7 +47,9 @@ int main(int argc, char **argv, char **env)
             top->eval();
         }
         vbdBar(top->data_out & 0xFF);
+
         top->en = 0;
+        flag_p = flag;
 
         // either simulation finished, or 'q' is pressed
         if ((Verilated::gotFinish()) || (vbdGetkey() == 'q'))
