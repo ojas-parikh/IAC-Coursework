@@ -5,7 +5,7 @@ module lfsr(
     output  logic [3:0] data_out
 );
 
-
+logic [4:1] sreg; // shift register
 
 always_ff @(posedge clk, posedge rst) 
     if (rst)
